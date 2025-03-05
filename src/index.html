@@ -5,10 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel ="shortcut icon" href="#" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="./main.js"></script>
     <script type="module" src="./main.ts"></script>
-    <title>Parcel Template</title>
+    <title>Kanban Board</title>
 </head>
 <body>
+    <div class="add-task">
+        <h4>Add a task</h4>
+        <input type="text" id="task-input" placeholder="Enter task name">
+        <input type="text" id="task-description" placeholder="Enter task description">
+        <select id="task-category">
+            <option value="none">Select Category</option>
+            <option value="ux">UX</option>
+            <option value="frontend">Frontend</option>
+            <option value="backend">Backend</option>
+        </select>
+        <button id="add-task">Add Task</button>
+    </div>
+    <div class="add-member">
+        <h4>Add a member</h4>
+        <input type="text" id="member-input" placeholder="Enter member name">
+        <div class="checkbox-group">
+            <label><input type="checkbox" value="ux">UX</label>
+            <label><input type="checkbox" value="frontend">Frontend</label>
+            <label><input type="checkbox" value="backend">Backend</label>
+        </div>
+        <button id="add-member">Add Member</button>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="filter-sort-container">
+                <div class="filter">
+                    <h3>Filter</h3>
+                    <label for="filter-member">Filter by Member:</label>
+                    <select id="filter-member">
+                        <option value="">Select Member</option>
+                    </select>
+                    <label for="filter-category">Filter by Category:</label>
+                    <select id="filter-category">
+                        <option value="">Select Category</option>
+                        <option value="ux">UX</option>
+                        <option value="frontend">Frontend</option>
+                        <option value="backend">Backend</option>
+                    </select>
+                </div>
+                <div class="sort">
+                    <h3>Sort</h3>
+                    <label for="sort-field">Sort by:</label>
+                    <select id="sort-field">
+                        <option value="timestamp">Timestamp</option>
+                        <option value="title">Title</option>
+                    </select>
+                    <label for="sort-order">Order:</label>
+                    <select id="sort-order">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="kanban-board">
+            <div class="column" id="todo-column">
+                <h2>To Do</h2>
+                <div class="task-list" id="todo-tasks"></div>
+            </div>
+            <div class="column" id="in-progress-column">
+                <h2>In Progress</h2>
+                <div class="task-list" id="in-progress-tasks"></div>
+            </div>
+            <div class="column" id="done-column">
+                <h2>Done</h2>
+                <div class="task-list" id="done-tasks"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

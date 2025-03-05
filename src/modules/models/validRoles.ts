@@ -1,0 +1,1 @@
+export type validRoles = ('ux' | 'frontend' | 'backend')[];
