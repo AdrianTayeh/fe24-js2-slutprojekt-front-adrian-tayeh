@@ -3,7 +3,6 @@ import { renderTasks } from "./renderService";
 import { applyFilters, applySort } from "./filterSortService";
 import { Task } from "../models/tasks";
 import { Member } from "../models/members";
-import { validRoles } from "../models/validRoles";
 
 export async function setupEventListeners() {
     const tasks: Task[] = await fetchTasks();
@@ -12,11 +11,33 @@ export async function setupEventListeners() {
     renderTasks(tasks, members);
     populateFilterMemberSelect(members);
 
-    document.getElementById("add-task")?.addEventListener("click", async () => {
+    const addTaskForm = document.getElementById("add-task-form") as HTMLFormElement;
+    if (addTaskForm) {
+        addTaskForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            handleAddTask();
+        });
+    }
+
+    const addMemberForm = document.getElementById("add-member-form") as HTMLFormElement;
+    if (addMemberForm) {
+        addMemberForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            handleAddMember();
+        });
+    }
+
+    document.getElementById("filter-member")?.addEventListener("change", applyFiltersAndSort);
+    document.getElementById("filter-category")?.addEventListener("change", applyFiltersAndSort);
+    document.getElementById("sort-field")?.addEventListener("change", applyFiltersAndSort);
+    document.getElementById("sort-order")?.addEventListener("change", applyFiltersAndSort);
+
+    async function handleAddTask() {
         const title = (document.getElementById("task-input") as HTMLInputElement).value;
         const description = (document.getElementById("task-description") as HTMLInputElement).value;
         const category = (document.getElementById("task-category") as HTMLSelectElement).value as "ux" | "frontend" | "backend" | "none";
         const priority = (document.getElementById("task-priority") as HTMLSelectElement).value as "low" | "medium" | "high";
+        const parentId = (document.getElementById("parent-task") as HTMLSelectElement).value || undefined;
 
         if (title && description && category !== "none") {
             const newTask = {
@@ -24,15 +45,16 @@ export async function setupEventListeners() {
                 description,
                 category,
                 priority,
+                parentId,
             } as Partial<Task>;
             await addTask(newTask);
             const updatedTasks = await fetchTasks();
             renderTasks(updatedTasks, members);
             highlightElement(document.querySelector(".add-task"));
         }
-    });
+    }
 
-    document.getElementById("add-member")?.addEventListener("click", async () => {
+    async function handleAddMember() {
         const name = (document.getElementById("member-input") as HTMLInputElement).value;
         const roles = Array.from(document.querySelectorAll('.add-member input[type="checkbox"]:checked') as NodeListOf<HTMLInputElement>).map((checkbox) => checkbox.value) as ("ux" | "frontend" | "backend")[];
 
@@ -61,12 +83,7 @@ export async function setupEventListeners() {
                 console.error("Failed to add member:", error);
             }
         }
-    });
-
-    document.getElementById("filter-member")?.addEventListener("change", applyFiltersAndSort);
-    document.getElementById("filter-category")?.addEventListener("change", applyFiltersAndSort);
-    document.getElementById("sort-field")?.addEventListener("change", applyFiltersAndSort);
-    document.getElementById("sort-order")?.addEventListener("change", applyFiltersAndSort);
+    }
 
     async function applyFiltersAndSort() {
         const filters = {

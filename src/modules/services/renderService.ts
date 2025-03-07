@@ -1,6 +1,6 @@
 import { Task } from "../models/tasks";
 import { Member } from "../models/members";
-import { fetchTasks, assignTask, markTaskAsDone, removeTask, updateTask, addTask } from "./apiService";
+import { fetchTasks, assignTask, markTaskAsDone, removeTask, updateTask } from "./apiService";
 import { applyFilters, applySort } from "./filterSortService";
 import { showAlert } from "./alertService";
 
@@ -8,15 +8,16 @@ export function renderTasks(tasks: Task[], members: Member[], filters: any = {},
     let filteredTasks = applyFilters(tasks, filters);
     filteredTasks = applySort(filteredTasks, sort);
 
-    const todoTasks = filteredTasks.filter(task => task.status === 'to do');
-    const inProgressTasks = filteredTasks.filter(task => task.status === 'in progress');
-    const doneTasks = filteredTasks.filter(task => task.status === 'done');
+    const todoTasks = filteredTasks.filter(task => task.status === 'to do' && !task.parentId);
+    const inProgressTasks = filteredTasks.filter(task => task.status === 'in progress' && !task.parentId);
+    const doneTasks = filteredTasks.filter(task => task.status === 'done' && !task.parentId);
 
     renderTaskList(todoTasks, 'todo-tasks', members);
     renderTaskList(inProgressTasks, 'in-progress-tasks', members);
     renderTaskList(doneTasks, 'done-tasks', members);
 
     addDragAndDropListeners(tasks, members);
+    populateParentTaskSelect(tasks);
 }
 
 function renderTaskList(tasks: Task[], elementId: string, members: Member[]): void {
@@ -25,7 +26,7 @@ function renderTaskList(tasks: Task[], elementId: string, members: Member[]): vo
         taskListElement.innerHTML = '';
         tasks.forEach(task => {
             const taskElement = document.createElement('div');
-            taskElement.className = `task priority-${task.priority}`;
+            taskElement.className = `task priority-${task.priority} ${task.parentId ? 'subtask' : 'parent-task'}`;
             taskElement.draggable = true;
             taskElement.dataset.id = task.id;
             taskElement.innerHTML = `
@@ -54,7 +55,7 @@ function renderTaskList(tasks: Task[], elementId: string, members: Member[]): vo
                     });
                 }
 
-                const prioritySelect = taskElement.querySelector('select.priority-seklect');
+                const prioritySelect = taskElement.querySelector('select.priority-select');
                 if(prioritySelect) {
                     prioritySelect.addEventListener('change', async (event) => {
                         const priority = (event.target as HTMLSelectElement).value as 'low' | 'medium' | 'high';
@@ -166,13 +167,33 @@ async function handleDrop(event: DragEvent, tasks: Task[], members: Member[]) {
     }
 }
 
-function renderSubtasks(subtasks: Task[]):string {
+function renderSubtasks(subtasks: Task[]): string {
     return `
         <div class="subtasks">
             <h4>Subtasks:</h4>
             <ul>
-                ${subtasks.map(subtask => `<li>${subtask.title}</li>`).join('')}
+                ${subtasks.map(subtask => `
+                    <li class="subtask-item">
+                        <div class="subtask-card priority-${subtask.priority}" data-id="${subtask.id}">
+                            <h5>${subtask.title}</h5>
+                            <p>Category: ${subtask.category}</p>
+                        </div>
+                    </li>
+                `).join('')}
             </ul>
         </div>
     `;
+}
+
+function populateParentTaskSelect(tasks: Task[]): void {
+    const parentTaskSelect = document.getElementById('parent-task') as HTMLSelectElement;
+    if (parentTaskSelect) {
+        parentTaskSelect.innerHTML = '<option value="">No Parent Task</option>';
+        tasks.forEach(task => {
+            const option = document.createElement('option');
+            option.value = task.id;
+            option.textContent = task.title;
+            parentTaskSelect.appendChild(option);
+        });
+    }
 }
