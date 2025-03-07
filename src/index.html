@@ -36,11 +36,20 @@
             <h4>Add a member</h4>
             <input type="text" id="member-input" placeholder="Enter member name">
             <div class="checkbox-group">
-                <label><input type="checkbox" value="ux">UX</label>
-                <label><input type="checkbox" value="frontend">Frontend</label>
-                <label><input type="checkbox" value="backend">Backend</label>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="ux" value="ux">
+                    <label for="ux">UX</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="frontend" value="frontend">
+                    <label for="frontend">Frontend</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="backend" value="backend">
+                    <label for="backend">Backend</label>
+                </div>
+                <button id="add-member">Add Member</button>
             </div>
-            <button id="add-member">Add Member</button>
         </form>
     </div>
     <div class="container">

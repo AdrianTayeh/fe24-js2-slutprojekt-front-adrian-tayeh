@@ -11,6 +11,23 @@ body {
     padding: 0;
 }
 
+label {
+    display: inline-block;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 16px; /* Explicit width */
+    height: 16px;
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -207,9 +224,16 @@ body {
 
 .add-member .checkbox-group {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
     margin-top: 10px;
+}
+
+.checkbox-group {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    gap: 10px;
 }
 
 .checkbox-group label {
@@ -319,6 +343,15 @@ body {
     margin-bottom: 5px;
 }
 
+.checkbox-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    gap:0px;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -333,31 +366,21 @@ body {
         width: 100%;
     }
 
-    .checkbox-group {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 0;
-        margin: 0;
-    }
-
-    .checkbox-group input {
-        padding: 0;
-        margin: 0;
-        background-color: red;
-    }
-    .checkbox-group label {
-        margin-right: 0;
-        /* margin-bottom: 5px; */
-        /* align-self: flex-start; */
-        background-color: aqua;
-        padding: 0;
-        margin: 0;
-    }
 
     .filter-sort-container {
         flex-direction: row;
         width: 100%;
         justify-content: center;
     }
+
+    .checkbox-group{
+        flex-direction: column;
+    }
+
+    .checkbox-item input[type="checkbox"], .checkbox-item label, .checkbox-item {
+        margin: 0;
+        padding: 0;
+        gap: 0;
+    }
+
 }
