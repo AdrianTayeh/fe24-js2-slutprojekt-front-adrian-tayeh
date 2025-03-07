@@ -89,7 +89,6 @@ input[type="checkbox"] {
     justify-content: center;
     padding: 20px;
     gap: 20px;
-    flex-wrap: wrap;
     width: 100%;
 }
 
@@ -223,7 +222,7 @@ input[type="checkbox"] {
 }
 
 .add-member .checkbox-group {
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
@@ -231,9 +230,12 @@ input[type="checkbox"] {
 }
 
 .checkbox-group {
-    justify-content: flex-start !important;
+    /* justify-content: flex-start !important;
     align-items: flex-start !important;
-    gap: 10px;
+    gap: 10px; */
+    width: auto;
+    display: block;
+    text-align: left;
 }
 
 .checkbox-group label {
@@ -248,6 +250,7 @@ input[type="checkbox"] {
 
 .add-member input[type="checkbox"] {
     margin-right: 5px;
+    width: 13px;
 }
 
 .add-button {
@@ -366,6 +369,9 @@ input[type="checkbox"] {
         width: 100%;
     }
 
+    .checkbox-item{
+        
+    }
 
     .filter-sort-container {
         flex-direction: row;
