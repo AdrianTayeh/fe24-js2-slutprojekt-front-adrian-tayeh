@@ -19,6 +19,14 @@
             <option value="frontend">Frontend</option>
             <option value="backend">Backend</option>
         </select>
+        <select id="task-priority">
+            <option value="low">Low Priority</option>
+            <option value="medium">Medium Priority</option>
+            <option value="high">High Priority</option>
+        </select>
+        <select id="parent-task">
+            <option value="">No Parent Task</option>
+        </select>
         <button id="add-task">Add Task</button>
     </div>
     <div class="add-member">
@@ -32,35 +40,33 @@
         <button id="add-member">Add Member</button>
     </div>
     <div class="container">
-        <div class="sidebar">
-            <div class="filter-sort-container">
-                <div class="filter">
-                    <h3>Filter</h3>
-                    <label for="filter-member">Filter by Member:</label>
-                    <select id="filter-member">
-                        <option value="">Select Member</option>
-                    </select>
-                    <label for="filter-category">Filter by Category:</label>
-                    <select id="filter-category">
-                        <option value="">Select Category</option>
-                        <option value="ux">UX</option>
-                        <option value="frontend">Frontend</option>
-                        <option value="backend">Backend</option>
-                    </select>
-                </div>
-                <div class="sort">
-                    <h3>Sort</h3>
-                    <label for="sort-field">Sort by:</label>
-                    <select id="sort-field">
-                        <option value="timestamp">Timestamp</option>
-                        <option value="title">Title</option>
-                    </select>
-                    <label for="sort-order">Order:</label>
-                    <select id="sort-order">
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
-                </div>
+        <div class="filter-sort-container">
+            <div class="filter">
+                <h3>Filter</h3>
+                <label for="filter-member">Filter by Member:</label>
+                <select id="filter-member">
+                    <option value="">Select Member</option>
+                </select>
+                <label for="filter-category">Filter by Category:</label>
+                <select id="filter-category">
+                    <option value="">Select Category</option>
+                    <option value="ux">UX</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                </select>
+            </div>
+            <div class="sort">
+                <h3>Sort</h3>
+                <label for="sort-field">Sort by:</label>
+                <select id="sort-field">
+                    <option value="timestamp">Timestamp</option>
+                    <option value="title">Title</option>
+                </select>
+                <label for="sort-order">Order:</label>
+                <select id="sort-order">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
             </div>
         </div>
         <div class="kanban-board">

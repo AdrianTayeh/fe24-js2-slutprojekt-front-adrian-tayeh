@@ -16,12 +16,14 @@ export async function setupEventListeners() {
         const title = (document.getElementById("task-input") as HTMLInputElement).value;
         const description = (document.getElementById("task-description") as HTMLInputElement).value;
         const category = (document.getElementById("task-category") as HTMLSelectElement).value as "ux" | "frontend" | "backend" | "none";
+        const priority = (document.getElementById("task-priority") as HTMLSelectElement).value as "low" | "medium" | "high";
 
         if (title && description && category !== "none") {
             const newTask = {
                 title,
                 description,
                 category,
+                priority,
             } as Partial<Task>;
             await addTask(newTask);
             const updatedTasks = await fetchTasks();

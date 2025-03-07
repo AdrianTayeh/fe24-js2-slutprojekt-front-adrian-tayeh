@@ -6,4 +6,5 @@ export type Task =  {
     status: 'to do' | 'in progress' | 'done';
     assigned?: string;
     timestamp: string;
+    priority: 'low' | 'medium' | 'high';
 }
