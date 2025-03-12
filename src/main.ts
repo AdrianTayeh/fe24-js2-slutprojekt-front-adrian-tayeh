@@ -1,3 +1,3 @@
-import { setupEventListeners } from "./modules/services/eventListeners";
+import { setupEventListeners } from "./modules/services/eventListeners/eventListenerIndex";
 
 setupEventListeners();

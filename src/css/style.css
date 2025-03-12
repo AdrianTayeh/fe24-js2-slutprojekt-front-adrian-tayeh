@@ -183,10 +183,6 @@ input[type="checkbox"] {
     color: #333;
 }
 
-.task button:hover, .task select:hover {
-    background-color: #0e2a1c;
-}
-
 .add-task, .add-member {
     background-color: #ebecf0;
     padding: 20px;
