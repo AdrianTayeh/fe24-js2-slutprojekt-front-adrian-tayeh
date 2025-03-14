@@ -3,6 +3,10 @@ import { renderTasks } from "../renderService/renderIndex";
 import { applyFilters, applySort } from "../filterSortService";
 import { Member } from "../../models/members";
 
+/**
+ * Applies filter and sorting to the tasks and renders the updated list.
+ * @param {Member[]} members - The array of members 
+ */
 export async function applyFiltersAndSort(members: Member[]) {
     const filters = {
         memberId: (document.getElementById("filter-member") as HTMLSelectElement)?.value,

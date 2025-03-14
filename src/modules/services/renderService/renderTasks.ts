@@ -4,6 +4,13 @@ import { renderTaskList } from "./renderTaskList";
 import { addDragAndDropListeners } from "./dragAndDrop";
 import { applyFilters, applySort } from "../filterSortService";
 
+/**
+ * Renders tasks based on filter and sorting options
+ * @param {Task[]} tasks - The array of tasks 
+ * @param {Member[]} members - The array of members
+ * @param {any} filters - The filters to apply
+ * @param {any} sort - The sorting options
+ */
 export function renderTasks(tasks: Task[], members: Member[], filters: any = {}, sort: any = {}): void {
     let filteredTasks = applyFilters(tasks, filters);
     filteredTasks = applySort(filteredTasks, sort);
@@ -20,6 +27,10 @@ export function renderTasks(tasks: Task[], members: Member[], filters: any = {},
     populateParentTaskSelect(tasks);
 }
 
+/**
+ * Populates the parent task select dropdown
+ * @param {Task[]} tasks - The array of tasks
+ */
 function populateParentTaskSelect(tasks: Task[]): void {
     const parentTaskSelect = document.getElementById('parent-task') as HTMLSelectElement;
     if (parentTaskSelect) {

@@ -6,6 +6,9 @@ import { applyFiltersAndSort } from "./filterSortListeners";
 import { Task } from "../../models/tasks";
 import { Member } from "../../models/members";
 
+/**
+ * Sets up event listeners for the application
+ */
 export async function setupEventListeners() {
     const tasks: Task[] = await fetchTasks();
     const members: Member[] = await fetchMembers();
@@ -35,6 +38,10 @@ export async function setupEventListeners() {
     document.getElementById("sort-order")?.addEventListener("change", () => applyFiltersAndSort(members));
 }
 
+/**
+ * Populates the filter member select dropdown with the list of members
+ * @param {Member[]} members - The array of members
+ */
 function populateFilterMemberSelect(members: Member[]) {
     const filterMemberSelect = document.getElementById("filter-member");
     if (filterMemberSelect) {

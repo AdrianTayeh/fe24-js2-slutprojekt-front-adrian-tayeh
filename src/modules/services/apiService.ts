@@ -2,11 +2,16 @@ import { Member } from "../models/members";
 import { Task } from "../models/tasks";
 import { showAlert } from "./alertService";
 
+// URLs for the API endpoints
 const taskURL =
   "https://fe24-js2-slutprojekt-back-adrian-tayeh.onrender.com/tasks";
 const memberURL =
   "https://fe24-js2-slutprojekt-back-adrian-tayeh.onrender.com/members";
 
+  /**
+   * Fetches tasks from the API
+   * @returns {Promise<Task[]>} A promise that resolves to an array of tasks
+   */
 export async function fetchTasks(): Promise<Task[]> {
   try {
     const response = await fetch(taskURL);
@@ -22,6 +27,10 @@ export async function fetchTasks(): Promise<Task[]> {
   }
 }
 
+/**
+ * Fetches members from the API
+ * @returns {Promise<Member[]>} A promise that resolves to an array of members
+ */
 export async function fetchMembers(): Promise<Member[]> {
   try {
     const response = await fetch(memberURL);
@@ -37,6 +46,11 @@ export async function fetchMembers(): Promise<Member[]> {
   }
 }
 
+/**
+ * Assigns a task to a member
+ * @param {string} taskId - The ID of the task to assign
+ * @param {string} memberId - The ID of the member to assign the task to
+ */
 export async function assignTask(
   taskId: string,
   memberId: string
@@ -55,6 +69,10 @@ export async function assignTask(
   }
 }
 
+/**
+ * Marks a task as done
+ * @param {string} taskId - The ID of the task to mark as done
+ */
 export async function markTaskAsDone(taskId: string): Promise<void> {
   try {
     await fetch(`${taskURL}/${taskId}/done`, {
@@ -67,6 +85,10 @@ export async function markTaskAsDone(taskId: string): Promise<void> {
   }
 }
 
+/**
+ * Reomves a task
+ * @param {string} taskId - The ID of the task to remove
+ */
 export async function removeTask(taskId: string): Promise<void> {
   try {
     await fetch(`${taskURL}/${taskId}`, {
@@ -78,6 +100,10 @@ export async function removeTask(taskId: string): Promise<void> {
   }
 }
 
+/**
+ * Adds a new task
+ * @param {Partial<Task>} task - The task data to add
+ */
 export async function addTask(task: Partial<Task>): Promise<void> {
   try {
     const response = await fetch(taskURL, {
@@ -101,6 +127,11 @@ export async function addTask(task: Partial<Task>): Promise<void> {
   }
 }
 
+/**
+ * Updates a parent task with a subtask
+ * @param {string} parentId - The ID of the parent task
+ * @param {string} subtaskId - The ID of the subtask to add
+ */
 async function updateParentTaskWithSubtask(
   parentId: string,
   subtaskId: string
@@ -123,6 +154,10 @@ async function updateParentTaskWithSubtask(
   }
 }
 
+/**
+ * Adds a new member
+ * @param {Partial<Member>} member - The member data to add
+ */
 export async function addMember(member: Partial<Member>): Promise<void> {
   try {
     await fetch(memberURL, {
@@ -136,6 +171,11 @@ export async function addMember(member: Partial<Member>): Promise<void> {
   }
 }
 
+/**
+ * Updates a task
+ * @param {string} taskId - The ID of the task to update
+ * @param {Partial<Task>} updates - The task data to update
+ */
 export async function updateTask(
   taskId: string,
   updates: Partial<Task>

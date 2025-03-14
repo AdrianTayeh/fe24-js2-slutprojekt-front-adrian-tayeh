@@ -6,6 +6,12 @@ import { renderTasks } from "./renderTasks";
 import { getMemberInitials } from "./utils";
 import { renderSubtasks } from "./renderSubtasks";
 
+/**
+ * Renders a list of tasks in a specified element
+ * @param {Task[]} tasks - The array of tasks
+ * @param {string} elementId - The ID of the element to render the tasks in
+ * @param {Member[]} members - The array of members
+ */
 export function renderTaskList(tasks: Task[], elementId: string, members: Member[]): void {
     const taskListElement = document.getElementById(elementId);
     if (taskListElement) {

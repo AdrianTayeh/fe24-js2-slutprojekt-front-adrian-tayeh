@@ -1,5 +1,10 @@
 import { Task } from "../../models/tasks";
 
+/**
+ * Renders the subtasks of a task
+ * @param {Task[]} subtasks - The array of subtasks
+ * @returns {string} The HTML for the subtasks
+ */
 export function renderSubtasks(subtasks: Task[]): string {
     return `
         <div class="subtasks">

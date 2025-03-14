@@ -1,5 +1,11 @@
 import { Task } from "../models/tasks";
 
+/**
+ * Applies filter to the list of tasks
+ * @param {Task[]} tasks - The array of tasks
+ * @param {any} filters - The filters to apply
+ * @returns {Task[]} The filtered array of tasks
+ */
 export function applyFilters(tasks: Task[], filters: any): Task[] {
     let filteredTasks = tasks;
 
@@ -13,6 +19,12 @@ export function applyFilters(tasks: Task[], filters: any): Task[] {
     return filteredTasks;
 }
 
+/**
+ * Applies sorting to the list of tasks
+ * @param {Task[]} tasks - The array of tasks 
+ * @param {any} sort - The sorting options 
+ * @returns {Task[]} The sorted array of tasks
+ */
 export function applySort(tasks: Task[], sort: any): Task[] {
     if(sort.field) {
         tasks = tasks.sort((a,b) => {

@@ -4,6 +4,11 @@ import { fetchTasks, markTaskAsDone, assignTask } from "../apiService";
 import { renderTasks } from "./renderTasks";
 import { showAlert } from "../alertService";
 
+/**
+ * Adds drag and drop event listeners to tasks and task lists
+ * @param {Task[]} tasks - The array of tasks
+ * @param {Member[]} members - The array of members
+ */
 export function addDragAndDropListeners(tasks: Task[], members: Member[]) {
     document.querySelectorAll('.task').forEach(task => {
         task.addEventListener('dragstart', (event) => handleDragStart(event as DragEvent));
@@ -16,21 +21,39 @@ export function addDragAndDropListeners(tasks: Task[], members: Member[]) {
     });
 }
 
+/**
+ * Handles the drag start event
+ * @param {DragEvent} event - The drag event
+ */
 function handleDragStart(event: DragEvent) {
     const target = event.target as HTMLElement;
     event.dataTransfer?.setData('text/plain', target.dataset.id!);
     target.classList.add('dragging');
 }
 
+/**
+ * Handles the drag end event
+ * @param {DragEvent} event - The drag event
+ */
 function handleDragEnd(event: DragEvent) {
     const target = event.target as HTMLElement;
     target.classList.remove('dragging');
 }
 
+/**
+ * Handles the drag over event
+ * @param {DragEvent} event - The drag event
+ */
 function handleDragOver(event: DragEvent) {
     event.preventDefault();
 }
 
+/**
+ * Handles the drop event
+ * @param {DragEvent} event - The drag event
+ * @param {Task[]} tasks - The array of tasks 
+ * @param {Member[]} members - The array of members 
+ */
 async function handleDrop(event: DragEvent, tasks: Task[], members: Member[]) {
     event.preventDefault();
     const taskId = event.dataTransfer?.getData('text/plain')!;

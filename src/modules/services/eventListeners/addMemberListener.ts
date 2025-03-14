@@ -2,6 +2,9 @@ import { addMember, fetchMembers, fetchTasks } from "../apiService";
 import { renderTasks } from "../renderService/renderIndex";
 import { Member } from "../../models/members";
 
+/**
+ * Handles the addition of a new member
+ */
 export async function handleAddMember() {
     const name = (document.getElementById("member-input") as HTMLInputElement).value;
     const roles = Array.from(document.querySelectorAll('.add-member input[type="checkbox"]:checked') as NodeListOf<HTMLInputElement>).map((checkbox) => checkbox.value) as ("ux" | "frontend" | "backend")[];
@@ -33,6 +36,10 @@ export async function handleAddMember() {
     }
 }
 
+/**
+ * Highlights an element by adding a CSS class
+ * @param {Element | null} element - The element to highlight 
+ */
 function highlightElement(element: Element | null) {
     if (element) {
         element.classList.add("highlight");
@@ -42,6 +49,10 @@ function highlightElement(element: Element | null) {
     }
 }
 
+/**
+ * Populates the filter member select dropdown with the list of members
+ * @param {Member[]} members - The array of members
+ */
 function populateFilterMemberSelect(members: Member[]) {
     const filterMemberSelect = document.getElementById("filter-member");
     if (filterMemberSelect) {

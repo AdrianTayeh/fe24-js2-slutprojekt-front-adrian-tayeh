@@ -3,6 +3,10 @@ import { renderTasks } from "../renderService/renderIndex";
 import { Task } from "../../models/tasks";
 import { Member } from "../../models/members";
 
+/**
+ * Handles the addition of a new task
+ * @param {Member[]} members - The array of members
+ */
 export async function handleAddTask(members: Member[]) {
     const title = (document.getElementById("task-input") as HTMLInputElement).value;
     const description = (document.getElementById("task-description") as HTMLInputElement).value;
@@ -25,6 +29,10 @@ export async function handleAddTask(members: Member[]) {
     }
 }
 
+/**
+ * Highlights an element by adding a CSS class
+ * @param {Element | null} element - The element to highlight 
+ */
 function highlightElement(element: Element | null) {
     if (element) {
         element.classList.add("highlight");
