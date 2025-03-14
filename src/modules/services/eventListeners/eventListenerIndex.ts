@@ -37,7 +37,6 @@ export async function setupEventListeners() {
     document.getElementById("sort-field")?.addEventListener("change", () => applyFiltersAndSort(members));
     document.getElementById("sort-order")?.addEventListener("change", () => applyFiltersAndSort(members));
 }
-
 /**
  * Populates the filter member select dropdown with the list of members
  * @param {Member[]} members - The array of members

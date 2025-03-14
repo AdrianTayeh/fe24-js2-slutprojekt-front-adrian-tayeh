@@ -29,7 +29,7 @@ export function applySort(tasks: Task[], sort: any): Task[] {
     if(sort.field) {
         tasks = tasks.sort((a,b) => {
             if(sort.field === 'timestamp') {
-                return sort.order === 'asc' ? new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime() : new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+                return sort.order === 'asc' ? a.timestamp.localeCompare(b.timestamp) : b.timestamp.localeCompare(a.timestamp);
             } else if(sort.field === 'title') {
                 return sort.order === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
             }

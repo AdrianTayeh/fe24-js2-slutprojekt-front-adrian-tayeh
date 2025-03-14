@@ -37,8 +37,8 @@ export async function handleAddMember() {
 }
 
 /**
- * Highlights an element by adding a CSS class
- * @param {Element | null} element - The element to highlight 
+ * Highlights an element by adding a CSS class and removing it after a delay
+ * @param {Element | null} element - The element to highlight
  */
 function highlightElement(element: Element | null) {
     if (element) {

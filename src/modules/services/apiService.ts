@@ -160,6 +160,7 @@ async function updateParentTaskWithSubtask(
  */
 export async function addMember(member: Partial<Member>): Promise<void> {
   try {
+    console.log("Adding new member:", member);
     await fetch(memberURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
